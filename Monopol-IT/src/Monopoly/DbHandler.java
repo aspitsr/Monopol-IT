@@ -11,7 +11,7 @@ public class DbHandler
 {
 	String userName = "Aspit";
     String password = "1234";
-    String url = "jdbc:mysql://localhost/monopolit";
+    String url = "jdbc:mysql://bb-1852-pc/monopolit";
     Connection conn = null;
     Statement st = null;
     ResultSet rs = null;
