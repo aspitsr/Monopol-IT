@@ -1,6 +1,6 @@
 package Monopoly;
 
-public class Company extends Field {
+public class Company {
 
 	public Company() {
 		// TODO Auto-generated constructor stub

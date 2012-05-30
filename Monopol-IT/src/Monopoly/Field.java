@@ -8,10 +8,19 @@ public class Field {
 	int category = 1;
 	int rent;
 	String owner;
+	int x, y;
 	
+	public Field(int x, int y, String name, int value,int category) {
+		this.x = x;
+		this.y = y;
+		this.name = name;
+		this.value = value;
+		this.category = category;
+	}
 	
-	public Field() {
-		
+	public void setPositions(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void setOwner(String s) {
