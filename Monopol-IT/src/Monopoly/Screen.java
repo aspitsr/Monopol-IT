@@ -15,6 +15,7 @@ public class Screen extends JPanel implements Runnable {
 	public static boolean isGame = false;
 	public static boolean isLogin = false;
 	public static boolean loginOnce = false;
+	public static boolean isDebug = true;
 	
 	public static Point mse = new Point(0, 0);
 	
@@ -22,6 +23,8 @@ public class Screen extends JPanel implements Runnable {
 	public static Login login;
 	public static Splash splash;
 	public static Frame frame;
+	public static Game game;
+	public static Gui gui;
 	
 	public Screen(Frame frame) {
 		this.frame = frame;
@@ -32,7 +35,8 @@ public class Screen extends JPanel implements Runnable {
 	
 	public static void define() {
 		board = new Board();
-		
+		game = new Game();
+		gui = new Gui();
 	}
 	
 	public static void setLogin() {
@@ -50,6 +54,8 @@ public class Screen extends JPanel implements Runnable {
 				isFirst = false;
 			}
 			board.draw(g);
+			gui.draw(g);
+			game.draw(g);
 		} else {
 			splash.draw(g);
 		}

@@ -1,5 +1,6 @@
 package Monopoly;
 
+import java.awt.Graphics;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Player {
 	ArrayList<Integer> owned = new ArrayList<Integer>();
 	ArrayList<Integer> pawned = new ArrayList<Integer>();
 	Avatar avatar = new Avatar();
-	private int position = 0;
+	int position = 0;
 	
 	public Player(String s) {
 		name = s;
@@ -44,6 +45,10 @@ public class Player {
 		
 	}
 	
+	public void draw(Graphics g) {
+		g.drawString(""+name, Board.fields.get(position).getX(), Board.fields.get(position).getY());
+	}
+	
 	public int getPosition() {
 		return position;
 	}
@@ -54,7 +59,7 @@ public class Player {
 	}
 	
 	public String getName() {	
-		return name+"("+getMoney()+")";
+		return name;
 	}
 	
 	public void setName(String s) {	

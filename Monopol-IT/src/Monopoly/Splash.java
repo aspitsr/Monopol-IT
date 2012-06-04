@@ -24,8 +24,8 @@ public class Splash{
 		*/
 	}
 	
-	public int moveFrame = 0, moveSpeed = 10;
-	public int aniFrame = 0, aniSpeed = 10;
+	public int moveFrame = 0, moveSpeed = 1;
+	public int aniFrame = 0, aniSpeed = 1;
 	public void draw(Graphics g) {
 		if(aniFrame >= aniSpeed && alpha < 255) {
 			alpha += 1;

@@ -1,23 +1,18 @@
 package Monopoly;
 
-import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 
-
-public class Game extends JFrame {
-	public static String title = "";
-	public static Dimension size = new Dimension(768, 768);
-	DbHandler db = new DbHandler();
-	Board board;
+public class Game {
 	ArrayList<Player> players = new ArrayList(); 
+	Dice dice = new Dice();
 	
 	public Game() {
-		/*
+		
 		players.add(new Player("Magnus"));
 		players.add(new Player("Henrik"));
-		System.out.println("");
 		int rounds = 5;
 		for(int i=0;i<rounds;i++)	{
 			
@@ -28,30 +23,36 @@ public class Game extends JFrame {
 			
 			
 			
-		}*/
+		}
 		
-		this.setTitle(title);
-		this.setSize(size);
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		add(board);
-		
-		setVisible(true);
 
 	}
-/*
+	
+	public void draw(Graphics g) {
+		g.setColor(Color.BLACK);
+		for (int i = 0; i < players.size(); i++) {
+			g.drawString(players.get(i).getName(), Board.fields.get(players.get(i).getPosition()).getX() + 5, Board.fields.get(players.get(i).getPosition()).getY() + 60 + (i * 20));
+			System.out.println(players.get(i).getPosition() + " " + Board.fields.get(players.get(i).getPosition()).getX());
+		}
+		dice.draw(g);
+	}
+	
+	public void moveAvatar(int i, Player p){
+		int position = Screen.board.newPosition(i, p.getPosition());
+		p.setPosition(position);
+	}
+
 	public void round(Player p) {
-		Dice dice = new Dice();
-		
-		//System.out.println(p.getName()+"("+p.getMoney()+") moved from:"+p.getPosition());
-		board.moveAvatar(10, p);
-		
-		//p.setMoney(p.getMoney()-dice.roll(10));
-		
-		//System.out.println(p.getName()+"("+p.getMoney()+") moved to:"+p.getPosition());
+		dice.reset();
+		moveAvatar(dice.roll(2), p);
+		/*System.out.println(p.getName()+"("+p.getMoney()+") moved from:"+p.getPosition());
 		
 		
-	}*/
+		p.setMoney(p.getMoney()-dice.roll(10));
+		
+		System.out.println(p.getName()+"("+p.getMoney()+") moved to:"+p.getPosition());
+		
+		*/
+	}
 }

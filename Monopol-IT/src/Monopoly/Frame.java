@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Frame extends JFrame {
-	public static int height = 768;
+	public static int height = 795;
 	public static int width = 1024;
 	public static String title = "Monopol-IT";
 	public static Dimension size = new Dimension(width, height);

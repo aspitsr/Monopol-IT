@@ -1,13 +1,13 @@
 package Monopoly;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class ActionHandler implements KeyListener, MouseListener {
+public class ActionHandler implements KeyListener, MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -29,8 +29,7 @@ public class ActionHandler implements KeyListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		Screen.gui.click(e.getButton());
 	}
 
 	@Override
@@ -56,6 +55,16 @@ public class ActionHandler implements KeyListener, MouseListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		Screen.mse = new Point((e.getX()) - ((Frame.size.width - Screen.myWidth)/2), ((e.getY()) - ((Frame.size.height - (Screen.myHeight))-(Frame.size.width - Screen.myWidth)/2)));
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		Screen.mse = new Point((e.getX()) - ((Frame.size.width - Screen.myWidth)/2), ((e.getY()) - ((Frame.size.height - (Screen.myHeight))-(Frame.size.width - Screen.myWidth)/2)));
 	}
 
 }
