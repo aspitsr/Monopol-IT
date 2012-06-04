@@ -104,5 +104,23 @@ public class DbHandler
 		}
 	    return rs;
     }
-    
+    public int checkLogin(String username, String password){
+	    int id = 0;
+    	try{
+	    	st = conn.createStatement();
+    		rs = st.executeQuery("SELECT * FROM users WHERE username ='"+ username +"'");
+    		rs.first();
+    		System.out.println(rs.getString(1)+rs.getString(2)+rs.getString(3));
+    		System.out.println(rs.getString(3));
+    		System.out.println(password);
+    		if(password.equals(rs.getString(3))) {
+    			System.out.println("Hey");
+    			id = Integer.parseInt(rs.getString(1));
+    		}
+	    }
+	    catch (Exception e){
+	    	System.out.println(e);
+	    }
+	    return id;
+    }
 }

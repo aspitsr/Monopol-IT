@@ -4,8 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Frame extends JFrame {
-	public static String title = "TowerBacon Alpha - \"Swedish Ö is the most beautiful one!\"";
-	public static Dimension size = new Dimension(1024, 795);
+	public static int height = 768;
+	public static int width = 1024;
+	public static String title = "Monopol-IT";
+	public static Dimension size = new Dimension(width, height);
 	
 	public Frame() {
 		setTitle(title);
@@ -17,11 +19,9 @@ public class Frame extends JFrame {
 		init();
 	}
 	
-	public void init() {
-		setLayout(new GridLayout(1, 1, 0, 0));
-		
-		Screen screen = new Screen(this);
-		add(screen);
+	public void init() {		
+		Screen login = new Screen(this);
+		add(login);
 		
 		setVisible(true);
 	}
