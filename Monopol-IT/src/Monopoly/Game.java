@@ -22,6 +22,7 @@ public class Game {
 		players.add(new Player("Magnus"));
 		players.add(new Player("Henrik"));
 		players.add(new Player("Thomas"));
+		players.add(new Player("Benjamin"));
 	}
 	
 	public void round() {
