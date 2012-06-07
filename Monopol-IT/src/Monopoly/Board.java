@@ -22,6 +22,7 @@ public class Board extends JPanel {
 	private ResultSet bottom; 
 	//public static Field[][] fields;
 	public static ArrayList<Field> fields;
+	int[] data = new int[2];
 	public static int[][] validFields = {{Value.fieldStart,Value.fieldField,Value.fieldField,Value.fieldField,Value.fieldCorner}, 
 										 {Value.fieldField,Value.fieldAir,Value.fieldAir,Value.fieldAir,Value.fieldField}, 
 										 {Value.fieldField,Value.fieldAir,Value.fieldAir,Value.fieldAir,Value.fieldField}, 
@@ -45,15 +46,18 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public int newPosition(int roll, int position) {
-		int i = 0;
+	public static int[] newPosition(int roll, int position) {
 		int size = fields.size();
-		i = position + roll;
+		int passedStart = 0;
+		int rolled = position + roll;
 		// might be incorrect RTFM
-		while(i>=size) {
-			i = i-size;
+		while(rolled>=size) {
+			rolled -= size;
+			passedStart++;
 		}
-		return i;
+		Screen.board.data[0] = rolled;
+		Screen.board.data[1] = passedStart;
+		return Screen.board.data;
 	}
 	
 	public void draw(Graphics g){
@@ -114,6 +118,28 @@ public class Board extends JPanel {
 		
 		
 	}
+	
+	public static void moveAvatar(int roll, Player p) {
+		int position = p.getPosition();
+		System.out.print(p.getName()+p.getMoney()+" moved from "+fields.get(position).getName()+"("+fields.get(position).getValue()+")");
+		Screen.board.data = newPosition(roll, p.getPosition());
+		position = Screen.board.data[0];
+		if(Screen.board.data[1]>0) {
+			//p.passedStart(data[1]);
+		}
+		System.out.println(" to "+fields.get(position).getName()+"("+position+")");
+		p.setPosition(position);
+	}
+	
+	public void checkRent(Player p) {
+		if(fields.get(p.getPosition()).owned()) {
+			if(fields.get(p.getPosition()).getOwner().getName() != p.getName()) {
+				int rent = fields.get(p.getPosition()).getRent();
+				//p.payRent(rent);
+				//fields.get(p.getPosition()).getOwner().recieveRent(rent);
+			}
+		}
+	}
 
 	public void getFields()
 	{
@@ -125,17 +151,18 @@ public class Board extends JPanel {
 		}
 		for(int y=0;y<validFields.length;y++) {
 			for(int x=0;x<validFields[0].length;x++) {
-				if(y == 0 && x > 0) {
+				if(y == 0 && x > 0 && x < 4) {
 					try {
-						top.next();
-						fields.add(new Field(34 + (x * 140), 34 + (y * 140), top.getString(2), Integer.parseInt(top.getString(3)), Integer.parseInt(top.getString(4))));
+						if(top.next()) {
+							fields.add(new Field(34 + (x * 140), 34 + (y * 140), top.getString(2), Integer.parseInt(top.getString(3)), Integer.parseInt(top.getString(4))));
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
 			}
 		}
-		fields.add(new Field(34 + (4 * 140), 34 + (0 * 140), "Corner", 0, 0));
+		fields.add(new Field(34 + (4 * 140), 34 + (0 * 140), "Corner 1", 0, 0));
 		if (Screen.isDebug) {
 			System.out.println("" + fields.get(4).getName());
 		}
@@ -143,15 +170,16 @@ public class Board extends JPanel {
 			for(int x=0;x<validFields[0].length;x++) {
 				if(x == 4 && y > 0 && y < 4) {
 					try {
-						right.next();
+						if(right.next()) {
 						fields.add(new Field(34 + (x * 140), 34 + (y * 140), right.getString(2), Integer.parseInt(right.getString(3)), Integer.parseInt(right.getString(4))));
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
 			}
 		}
-		fields.add(new Field(34 + (4 * 140), 34 + (4 * 140), "Corner", 0, 0));
+		fields.add(new Field(34 + (4 * 140), 34 + (4 * 140), "Corner 2", 0, 0));
 		if (Screen.isDebug) {
 			System.out.println("" + fields.get(8).getName());
 		}
@@ -159,15 +187,16 @@ public class Board extends JPanel {
 			for(int x=validFields[0].length-2;x>0;x--) {
 				if(y == 4) {
 					try {
-						bottom.next();
-						fields.add(new Field(34 + (x * 140), 34 + (y * 140), bottom.getString(2), Integer.parseInt(bottom.getString(3)), Integer.parseInt(bottom.getString(4))));
+						if(bottom.next()) {
+							fields.add(new Field(34 + (x * 140), 34 + (y * 140), bottom.getString(2), Integer.parseInt(bottom.getString(3)), Integer.parseInt(bottom.getString(4))));
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
 			}
 		}
-		fields.add(new Field(34 + (0 * 140), 34 + (4 * 140), "Corner", 0, 0));
+		fields.add(new Field(34 + (0 * 140), 34 + (4 * 140), "Corner 3", 0, 0));
 		if (Screen.isDebug) {
 			System.out.println("" + fields.get(12).getName());
 		}
@@ -175,8 +204,9 @@ public class Board extends JPanel {
 			for(int x=0;x<validFields[0].length;x++) {
 				if(x == 0 && y > 0 && y < 4) {
 					try {
-						left.next();
-						fields.add(new Field(34 + (x * 140), 34 + (y * 140), left.getString(2), Integer.parseInt(left.getString(3)), Integer.parseInt(left.getString(4))));
+						if(left.next()) {
+							fields.add(new Field(34 + (x * 140), 34 + (y * 140), left.getString(2), Integer.parseInt(left.getString(3)), Integer.parseInt(left.getString(4))));
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}

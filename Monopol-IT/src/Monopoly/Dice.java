@@ -3,13 +3,12 @@ package Monopoly;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 
 
 public class Dice{
 	public int value;
-	ArrayList<Integer> rolls = new ArrayList();
+	ArrayList<Integer> rolls = new ArrayList<Integer>();
 	
 	public Dice() {
 		

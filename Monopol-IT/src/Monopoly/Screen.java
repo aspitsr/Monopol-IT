@@ -1,6 +1,5 @@
 package Monopoly;
 
-
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -27,7 +26,9 @@ public class Screen extends JPanel implements Runnable {
 	public static Gui gui;
 	
 	public Screen(Frame frame) {
-		this.frame = frame;
+		Screen.frame = frame;
+		frame.addMouseListener(new ActionHandler());
+		frame.addMouseMotionListener(new ActionHandler());
 		splash = new Splash(frame);
 		thread.start();
 	}
@@ -49,7 +50,6 @@ public class Screen extends JPanel implements Runnable {
 			if(isFirst) {
 				myWidth = getWidth();
 				myHeight = getHeight();
-				define();
 				
 				isFirst = false;
 			}
@@ -63,8 +63,12 @@ public class Screen extends JPanel implements Runnable {
 	
 	public void run() {
 		while(true) {
+
 			if(!isLogin) {
 				repaint();
+			}
+			if(isGame && !isFirst) {
+				game.round();
 			}
 			if(isLogin && !loginOnce) {
 				setLogin();

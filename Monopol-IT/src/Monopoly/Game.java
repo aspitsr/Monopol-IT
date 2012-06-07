@@ -6,53 +6,49 @@ import java.util.ArrayList;
 
 
 public class Game {
-	ArrayList<Player> players = new ArrayList(); 
-	Dice dice = new Dice();
+	public static int playerCount;
+	public static int round = 1;
+	public static int playingPlayer;
+	
+	public static Player turn;
+	
+	public static boolean rolled;
+	public static boolean playing = false;	
+	
+	public static ArrayList<Player> players = new ArrayList(); 
+	public static Dice dice = new Dice();
 	
 	public Game() {
-		
 		players.add(new Player("Magnus"));
 		players.add(new Player("Henrik"));
-		int rounds = 5;
-		for(int i=0;i<rounds;i++)	{
-			
-			
-			for(int x=0;x<players.size();x++)	{	
-				round(players.get(x));
-			}
-			
-			
-			
-		}
-		
-		
-
+		players.add(new Player("Thomas"));
 	}
+	
+	public void round() {
+		turn = players.get(playingPlayer);
+	}
+	
+	public static void startTurn(int i) {
+		System.out.println("Turn started");
+		dice.reset();
+		rolled = false;
+		playing = true;
+		turn = players.get(i);
+	}
+	
+	public static void endTurn(int i) {
+		playing = false;
+		rolled = false;
+	}
+	
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		for (int i = 0; i < players.size(); i++) {
 			g.drawString(players.get(i).getName(), Board.fields.get(players.get(i).getPosition()).getX() + 5, Board.fields.get(players.get(i).getPosition()).getY() + 60 + (i * 20));
-			System.out.println(players.get(i).getPosition() + " " + Board.fields.get(players.get(i).getPosition()).getX());
+			//System.out.println(players.get(i).getPosition() + " " + Board.fields.get(players.get(i).getPosition()).getX());
 		}
 		dice.draw(g);
 	}
-	
-	public void moveAvatar(int i, Player p){
-		int position = Screen.board.newPosition(i, p.getPosition());
-		p.setPosition(position);
-	}
 
-	public void round(Player p) {
-		dice.reset();
-		moveAvatar(dice.roll(2), p);
-		/*System.out.println(p.getName()+"("+p.getMoney()+") moved from:"+p.getPosition());
-		
-		
-		p.setMoney(p.getMoney()-dice.roll(10));
-		
-		System.out.println(p.getName()+"("+p.getMoney()+") moved to:"+p.getPosition());
-		
-		*/
-	}
 }

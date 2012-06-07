@@ -7,7 +7,7 @@ public class Field {
 	int property = 0;
 	int category = 1;
 	int rent;
-	String owner;
+	Player owner;
 	int x, y;
 	
 	public Field(int x, int y, String name, int value,int category) {
@@ -31,12 +31,18 @@ public class Field {
 		this.y = y;
 	}
 	
-	public void setOwner(String s) {
-		owner = s;
+	public boolean owned() {
+		if(owner != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
-	public void setName(String s)	{
-		name = s;
+	public void setOwner(Player p) {
+		if(owner == null & name != "Start") {
+			owner = p;
+		}
 	}
 	
 	public void setValue(int i)	{
@@ -52,7 +58,7 @@ public class Field {
 		return rent;
 	}
 	
-	public String getOwner() {
+	public Player getOwner() {
 		return owner; 
 	}
 	public int getValue() { 

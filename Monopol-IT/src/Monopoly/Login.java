@@ -62,6 +62,16 @@ class Login extends JPanel implements ActionListener
 	public void init() {
 		
 	}
+	
+	public void release() {
+		frame.remove(separator);
+		setLayout(null);
+		frame.remove(label1);
+		frame.remove(text1);
+		frame.remove(label2);
+		frame.remove(text2);
+		frame.remove(SUBMIT);
+	}
 
 	public void actionPerformed(ActionEvent ae) {
 		String value1=text1.getText();
@@ -71,8 +81,9 @@ class Login extends JPanel implements ActionListener
 		if (db.checkLogin(value1, value2) != 0) {
 			Screen.isGame = true;
 			Screen.isLogin = false;
-			Screen.define();
+			release();
 			validate();
+			Screen.define();
 			repaint();
 		} else {
 			System.out.println("enter the valid username and password");

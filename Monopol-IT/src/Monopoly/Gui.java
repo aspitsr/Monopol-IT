@@ -7,54 +7,45 @@ import java.awt.Rectangle;
 
 public class Gui {
 	public Rectangle[] button = new Rectangle[4];
+	public String[] buttonText = {"Roll", "Buy", "", "End turn"};
+	 
 	
 	public Gui() {
 		define();
 	}
 	
+	public void define() {
+		for(int i=0;i<button.length;i++) {
+			button[i] = new Rectangle(768+20, 178+(i*55), 200, 50);
+		}
+	}
+	
 	public void click(int mouseButton) {
-		
-		/*
 		if(mouseButton == 1) {
 			for(int i=0;i<button.length;i++) {
 				if(button[i].contains(Screen.mse)) {
-					if(buttonID[i] != Value.airAir) {
-						if(buttonID[i] == Value.airTrashCan) { //Delete item
-							holdsItem = false;
-							heldID = -1;
-						} else {
-							heldID = buttonID[i];
-							realID = i;
-							holdsItem = true;
+					System.out.println(buttonText[i]);
+					if(i == 0) {
+						if(!Game.rolled) {
+							Board.moveAvatar(Game.dice.roll(2), Game.turn);
+							//Game.checkRent(Game.turn);
+							Game.rolled = true;
 						}
+					}
+					if(i == 3) {
+						if(Game.players.get(Game.playingPlayer).getMoney()<0) {
+							Game.players.remove(Game.playingPlayer);
+						}
+						Game.playingPlayer++;
+						if(Game.playingPlayer>=Game.players.size()) {
+							Game.playingPlayer = 0;
+							Game.round++;
+						}
+						Game.playing = false;
+						Game.endTurn(Game.playingPlayer);
 					}
 				}
 			}
-			if(holdsItem) {
-				if(Screen.coinage >= Value.towerPrice[realID]) {
-					for(int y=0;y<Screen.room.block.length;y++) {
-						for(int x=0;x<Screen.room.block[0].length;x++) {
-							if(Screen.room.block[y][x].contains(Screen.mse)) {
-								if(Screen.room.block[y][x].groundID != Value.groundRoad && Screen.room.block[y][x].airID == Value.airAir) {
-									Screen.room.block[y][x].airID = heldID;
-									Screen.coinage -= Value.towerPrice[realID];
-									Screen.room.block[y][x].realID = realID;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		if(mouseButton == 3) {
-			holdsItem = false;
-			heldID = -1;
-		}*/
-	}
-	
-	public void define() {
-		for(int i=0;i<button.length;i++) {
-			button[i] = new Rectangle(768+20, 138+(i*55), 200, 50);
 		}
 	}
 	
@@ -62,14 +53,17 @@ public class Gui {
 		g.setFont(new Font("Verdana", Font.PLAIN, 15));
 		g.setColor(new Color(255,255,255,255));
 		g.fillRoundRect(768, 118, 240, 632, 30, 30);
-		
+		g.setColor(new Color(0,0,0,255));
+		g.drawString("Player turn: "+Game.players.get(Game.playingPlayer).getName(), 768+20, 138);
+		g.drawString("Round: "+Game.round, 768+20, 158);
 		
 		for(int i=0;i<button.length;i++) {
 			g.setColor(new Color(255,255,255, 255));
 			g.drawRoundRect(button[i].x, button[i].y, button[i].width, button[i].height, 20, 20);
 			g.setColor(new Color(0, 0, 0, 255));
 			g.drawRoundRect(button[i].x, button[i].y, button[i].width, button[i].height, 20, 20);
-			
+			g.setFont(new Font("Verdana", Font.BOLD, 20));
+			printSimpleString(buttonText[i], button[i].width, button[i].x, button[i].y+(button[i].height/2), g);
 			/*
 			if(button[i].contains(Screen.mse)) {
 				g.setColor(new Color(255,255,255, 150));
@@ -89,5 +83,12 @@ public class Gui {
 				g.drawString("$"+Value.towerPrice[i], button[i].x + itemIn, button[i].y + itemIn + 25);
 			}*/
 		}
+	}
+	
+	public void printSimpleString(String s, int width, int XPos, int YPos, Graphics g){  
+        int stringLen = (int)
+        g.getFontMetrics().getStringBounds(s, g).getWidth();  
+        int start = width/2 - stringLen/2;  
+        g.drawString(s, start + XPos, YPos);  
 	}
 }

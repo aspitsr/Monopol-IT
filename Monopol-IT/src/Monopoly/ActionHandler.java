@@ -27,9 +27,10 @@ public class ActionHandler implements KeyListener, MouseListener, MouseMotionLis
 		
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
-		Screen.gui.click(e.getButton());
+		if(Screen.isGame) {
+			Screen.gui.click(e.getButton());
+		}
 	}
 
 	@Override
