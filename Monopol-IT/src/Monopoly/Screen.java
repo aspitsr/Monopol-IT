@@ -14,7 +14,7 @@ public class Screen extends JPanel implements Runnable {
 	public static boolean isGame = false;
 	public static boolean isLogin = false;
 	public static boolean loginOnce = false;
-	public static boolean isDebug = true;
+	public static boolean isDebug = false;
 	
 	public static Point mse = new Point(0, 0);
 	
