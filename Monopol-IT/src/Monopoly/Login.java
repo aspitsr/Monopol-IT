@@ -49,6 +49,7 @@ class Login extends JPanel implements ActionListener, KeyListener
 		frame.add(label1);
 		text1.setBounds(150, 331, 188, 20);
 		frame.add(text1);
+		text1.requestFocus();
 		label2.setBounds(150, 351, 188, 20);
 		label2.setForeground(Color.WHITE);
 		frame.add(label2);
