@@ -32,6 +32,9 @@ public class Gui {
 							Game.rolled = true;
 						}
 					}
+					if(i == 1) {
+						Board.buyField(Game.turn);
+					}
 					if(i == 3) {
 						if(Game.players.get(Game.playingPlayer).getMoney()<0) {
 							Game.players.remove(Game.playingPlayer);

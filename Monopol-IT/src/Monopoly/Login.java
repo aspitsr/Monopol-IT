@@ -3,6 +3,8 @@ package Monopoly;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +15,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-class Login extends JPanel implements ActionListener
+class Login extends JPanel implements ActionListener, KeyListener
 {
 	JButton SUBMIT;
 	DbHandler db =  new DbHandler();
@@ -50,11 +52,11 @@ class Login extends JPanel implements ActionListener
 		label2.setBounds(150, 351, 188, 20);
 		label2.setForeground(Color.WHITE);
 		frame.add(label2);
+		text2.addKeyListener(this);
 		text2.setBounds(150, 371, 188, 20);
 		frame.add(text2);
 		SUBMIT.setBounds(150, 401, 188, 20);
 		frame.add(SUBMIT);
-		
 		SUBMIT.addActionListener(this);
 		
 	}
@@ -90,5 +92,38 @@ class Login extends JPanel implements ActionListener
 			JOptionPane.showMessageDialog(this,"Incorrect login or password",
 			"Error",JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println(""+e.getKeyCode());
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			String value1=text1.getText();
+			String value2=text2.getText();
+			if (db.checkLogin(value1, value2) != 0) {
+				Screen.isGame = true;
+				Screen.isLogin = false;
+				release();
+				validate();
+				Screen.define();
+				repaint();
+			} else {
+				System.out.println("enter the valid username and password");
+				JOptionPane.showMessageDialog(this,"Incorrect login or password",
+				"Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
