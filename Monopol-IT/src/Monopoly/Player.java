@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Player {
 	DbHandler db = new DbHandler();
 	ResultSet rs;
-	int money;
+	int money = 10000;
 	String name;
 	ArrayList<Integer> owned = new ArrayList<Integer>();
 	ArrayList<Integer> pawned = new ArrayList<Integer>();
@@ -85,6 +85,14 @@ public class Player {
 	}
 	
 	public int getMoney() {	
+		int money = 0;
+		try{
+			if(rs.first()) {
+				money = Integer.parseInt(rs.getString(3));
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 		return money;
 	}
 	
