@@ -36,16 +36,17 @@ public class Gui {
 						Board.buyField(Game.turn);
 					}
 					if(i == 3) {
+						Game.endTurn(Game.playingPlayer);
 						if(Game.players.get(Game.playingPlayer).getMoney()<0) {
 							Game.players.remove(Game.playingPlayer);
 						}
+						Game.playing = false;
 						Game.playingPlayer++;
 						if(Game.playingPlayer>=Game.players.size()) {
 							Game.playingPlayer = 0;
 							Game.round++;
 						}
-						Game.playing = false;
-						Game.endTurn(Game.playingPlayer);
+						Game.startTurn(Game.playingPlayer);
 					}
 				}
 			}
