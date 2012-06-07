@@ -131,12 +131,19 @@ public class Board extends JPanel {
 		p.setPosition(position);
 	}
 	
+	public static void buyField(Player p) {
+		if(!fields.get(p.getPosition()).owned()) {
+			fields.get(p.getPosition()).setOwner(p);
+			p.pay(fields.get(p.getPosition()).getPrice());
+		}
+	}
+	
 	public void checkRent(Player p) {
 		if(fields.get(p.getPosition()).owned()) {
 			if(fields.get(p.getPosition()).getOwner().getName() != p.getName()) {
 				int rent = fields.get(p.getPosition()).getRent();
-				//p.payRent(rent);
-				//fields.get(p.getPosition()).getOwner().recieveRent(rent);
+				p.payRent(rent);
+				fields.get(p.getPosition()).getOwner().recieveRent(rent);
 			}
 		}
 	}
