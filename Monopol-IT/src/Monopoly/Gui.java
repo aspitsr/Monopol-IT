@@ -36,16 +36,17 @@ public class Gui {
 						Board.buyField(Game.turn);
 					}
 					if(i == 3) {
+						Game.endTurn(Game.playingPlayer);
 						if(Game.players.get(Game.playingPlayer).getMoney()<0) {
 							Game.players.remove(Game.playingPlayer);
 						}
+						Game.playing = false;
 						Game.playingPlayer++;
 						if(Game.playingPlayer>=Game.players.size()) {
 							Game.playingPlayer = 0;
 							Game.round++;
 						}
-						Game.playing = false;
-						Game.endTurn(Game.playingPlayer);
+						Game.startTurn(Game.playingPlayer);
 					}
 				}
 			}
@@ -60,11 +61,10 @@ public class Gui {
 		g.drawString("Player turn: "+Game.players.get(Game.playingPlayer).getName(), 768+20, 138);
 		g.drawString("Round: "+Game.round, 768+20, 158);
 		g.drawString("Money", 768+20, 420);
-			for (int i = 0; i < Game.players.size(); i++) {
-				g.drawString(Game.players.get(i).getName() + ": "+ Game.players.get(i).getMoney(), 768 + 20, 440 + (i * 20));
-				
-			}
-
+		g.drawString(Game.players.get(0).name + ": " + Game.players.get(0).money, 768+20, 440);
+		g.drawString(Game.players.get(1).name + ": " + Game.players.get(1).money, 768+20, 460);	
+		g.drawString(Game.players.get(2).name + ": " + Game.players.get(2).money, 768+20, 480);	
+		g.drawString(Game.players.get(3).name + ": " + Game.players.get(3).money, 768+20, 500);	
 		
 		for(int i=0;i<button.length;i++) {
 			g.setColor(new Color(255,255,255, 255));

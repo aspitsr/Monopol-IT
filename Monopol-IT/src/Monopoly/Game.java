@@ -2,12 +2,7 @@ package Monopoly;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 
 public class Game {
@@ -23,25 +18,12 @@ public class Game {
 	public static ArrayList<Player> players = new ArrayList(); 
 	public static Dice dice = new Dice();
 	
-	//public static Image sprite;
-	
 	public Game() {
 		players.add(new Player("Magnus"));
 		players.add(new Player("Henrik"));
 		players.add(new Player("Thomas"));
 		players.add(new Player("Benjamin"));
-		
-		/*try {
-			URL url = Thread.currentThread().getContextClassLoader().getResource("res/mouse.png");
-			if (url == null) {
-				System.err.println("Unable to find sprite: res/mouse.png");
-				System.exit(0);
-			}
-			sprite = ImageIO.read(url);
-		} catch (IOException e) {
-			System.err.println("Unable to load sprite: res/mouse.png");
-			System.exit(0);
-		}*/
+		startTurn(0);
 	}
 	
 	public void round() {
