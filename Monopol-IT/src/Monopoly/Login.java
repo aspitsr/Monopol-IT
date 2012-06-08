@@ -77,13 +77,16 @@ class Login extends JPanel implements ActionListener, KeyListener
 	}
 
 	public void actionPerformed(ActionEvent ae) {
+		
 		String value1=text1.getText();
 		String value2=text2.getText();
 		System.out.println(value1+value2);
 		System.out.println(""+db.checkLogin(value1, value2));
-		if (db.checkLogin(value1, value2) != 0) {
+		int id = db.checkLogin(value1, value2);
+		if (id != 0) {
 			Screen.isGame = true;
 			Screen.isLogin = false;
+			Game.loggedPlayer = id;
 			release();
 			validate();
 			Screen.define();
