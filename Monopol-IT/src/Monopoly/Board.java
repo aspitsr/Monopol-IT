@@ -78,13 +78,14 @@ public class Board extends JPanel {
 				debugXY = "";
 			}
 			g.drawRect(fields.get(i).getX(), fields.get(i).getY(), 140, 140);
-			if (fields.get(i).getOwner() != null) {
+			g.drawString(debugXY + fields.get(i).getName(), fields.get(i).getX() + 5, fields.get(i).getY() + 20);
 				//owner
+			if (fields.get(i).getOwner() != null) {
 				g.drawString(fields.get(i).getOwner().getName(), fields.get(i)
 						.getX() + 5, fields.get(i).getY() + 140);
 			}
 			if (fields.get(i).getPrice()>0) {
-				g.drawString(debugXY + fields.get(i).getPrice(),
+				g.drawString(""+fields.get(i).getPrice(),
 						fields.get(i).getX() + 5, fields.get(i).getY() + 40);
 			}
 		}
