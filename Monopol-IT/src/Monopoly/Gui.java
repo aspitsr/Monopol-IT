@@ -28,7 +28,7 @@ public class Gui {
 					if(i == 0) {
 						if(!Game.rolled) {
 							Board.moveAvatar(Game.dice.roll(2), Game.turn);
-							//Game.checkRent(Game.turn);
+							Board.checkRent(Game.turn);
 							Game.rolled = true;
 						}
 					}
