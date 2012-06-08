@@ -123,4 +123,20 @@ public class DbHandler
 	    }
 	    return id;
     }
+    
+    public ResultSet selectPlayers(int i){
+        Statement stPlayers = null;
+        ResultSet rsPlayers = null;
+    	try{
+	    	stPlayers = conn.createStatement();
+	    	
+	    	
+	    	// Select Players
+    		rsPlayers = stPlayers.executeQuery("SELECT * FROM players WHERE game_id ='"+ i +"'");
+	    }
+	    catch (Exception e){
+	    	System.out.println(e);
+	    }
+	    return rsPlayers;
+    }
 }
