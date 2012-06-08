@@ -82,7 +82,6 @@ public class Board extends JPanel {
 				debugXY = "";
 			}
 			g.drawRect(fields.get(i).getX(), fields.get(i).getY(), 140, 140);
-			g.drawString(debugXY+fields.get(i).getName(),fields.get(i).getX()+5, fields.get(i).getY()+20);
 			if (fields.get(i).getOwner() != null) {
 				//owner
 				g.drawString(fields.get(i).getOwner().getName(), fields.get(i)
