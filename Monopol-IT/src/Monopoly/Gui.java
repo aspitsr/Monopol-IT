@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Gui {
-	public Rectangle[] button = new Rectangle[4];
-	public String[] buttonText = {"Roll", "Buy", "", "End turn"};
+	public Rectangle[] button = new Rectangle[3];
+	public String[] buttonText = {"Roll", "Buy", "End turn"};
 	 
 	
 	public Gui() {
