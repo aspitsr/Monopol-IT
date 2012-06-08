@@ -61,18 +61,14 @@ public class Board extends JPanel {
 	}
 	
 	public void draw(Graphics g){
+		
 		g.setFont(new Font("Verdana", Font.PLAIN, 15));
 		g.setColor(new Color(255,0,0));
 		g.fillRect(0, 0, Screen.myWidth, Screen.myHeight);
 		g.setColor(new Color(255,255,255));
 		g.fillRoundRect(9, 9, 750, 750, 30, 30);
 		g.setColor(new Color(0,0,0));
-		
-		
-		
-		
-		
-		
+
 		for (int i = 0; i <fields.size(); i++) {
 			String debugXY;
 			if(Screen.isDebug){
@@ -92,35 +88,6 @@ public class Board extends JPanel {
 						fields.get(i).getX() + 5, fields.get(i).getY() + 40);
 			}
 		}
-		
-		
-		
-		/*
-		for(int y=0;y<validFields.length;y++) {
-			for(int x=0;x<validFields[0].length;x++) {
-				//fields[y][x].setPositions(x, y);
-				if(validFields[y][x]>Value.fieldAir){
-					String debugXY;
-					if(Screen.isDebug){
-						debugXY = validFields.getX()+" "+Board.fields[y][x].getY()+" : ";
-					}
-					else{
-						debugXY = "";
-					}
-					g.drawRect(34 + (x * 140), 34 + (y * 140), 140, 140);
-					g.drawString(debugXY+Board.fields[y][x].getName(), 34 + (x * 140)+5, 34 + (y * 140)+20);
-					if (validFields[y][x]==Value.fieldField) {
-						g.drawString(debugXY + Board.fields[y][x].getPrice(),
-								34 + (x * 140) + 5, 34 + (y * 140) + 40);
-					}
-				}
-			}
-		}
-		*/
-		
-		
-		
-		
 	}
 	
 	public static void moveAvatar(int roll, Player p) {
@@ -129,7 +96,7 @@ public class Board extends JPanel {
 		Screen.board.data = newPosition(roll, p.getPosition());
 		position = Screen.board.data[0];
 		if(Screen.board.data[1]>0) {
-			//p.passedStart(data[1]);
+			p.passedStart(Screen.board.data[1]);
 		}
 		System.out.println(" to "+fields.get(position).getName()+"("+position+")");
 		p.setPosition(position);
@@ -224,60 +191,6 @@ public class Board extends JPanel {
 				}
 			}
 		}			
-				
-				
-				
-				
-		/*		
-				if(validFields[y][x]==0){
-					fields.add(new Field(34 + (x * 140), 34 + (y * 140), "Start", 0, 0));
-					System.out.println(""+Board.fields[y][x].getName());
-				} else if(validFields[y][x]==Value.fieldCorner){
-					Board.fields[y][x] = new Field(34 + (x * 140), 34 + (y * 140), "Corner", 0, 0);
-				} else if(validFields[y][x]==Value.fieldField){
-					if(y == 0) {
-						try {
-							top.next();
-							Board.fields[y][x] = new Field(34 + (x * 140), 34 + (y * 140), top.getString(2), Integer.parseInt(top.getString(3)), Integer.parseInt(top.getString(4)));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else if(x == 0 && y > 0 && y < 4) {
-						try {
-							left.next();
-							Board.fields[y][x] = new Field(34 + (x * 140), 34 + (y * 140), left.getString(2), Integer.parseInt(left.getString(3)), Integer.parseInt(left.getString(4)));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else if(x == 4 && y > 0 && y < 4) {
-						try {
-							right.next();
-							Board.fields[y][x] = new Field(34 + (x * 140), 34 + (y * 140), right.getString(2), Integer.parseInt(right.getString(3)), Integer.parseInt(right.getString(4)));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else if(y == 4) {
-						try {
-							bottom.next();
-							Board.fields[y][x] = new Field(34 + (x * 140), 34 + (y * 140), bottom.getString(2), Integer.parseInt(bottom.getString(3)), Integer.parseInt(bottom.getString(4)));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else {
-						Board.fields[y][x] = new Field(x, y, "Field", 0, 0);
-					}
-					System.out.println(""+Board.fields[y][x].getName());
-				}
-			}
-		}
-	}	
-		
-		
-		*/
 	}	
 		
 		
