@@ -110,10 +110,11 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public void checkRent(Player p) {
+	public static void checkRent(Player p) {
 		if(fields.get(p.getPosition()).owned()) {
-			if(fields.get(p.getPosition()).getOwner().getName() != p.getName()) {
+			if(fields.get(p.getPosition()).getOwner() != p) {
 				int rent = fields.get(p.getPosition()).getRent();
+				System.out.println("Rent is: "+rent);
 				p.payRent(rent);
 				fields.get(p.getPosition()).getOwner().recieveRent(rent);
 			}
