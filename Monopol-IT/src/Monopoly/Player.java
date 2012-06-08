@@ -84,15 +84,7 @@ public class Player {
 		name = s;
 	}
 	
-	public int getMoney() {	
-		int money = 0;
-		try{
-			if(rs.first()) {
-				money = Integer.parseInt(rs.getString(3));
-			}
-		} catch(Exception e) {
-			System.out.println(e);
-		}
+	public int getMoney() {			
 		return money;
 	}
 	
