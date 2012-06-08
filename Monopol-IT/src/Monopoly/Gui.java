@@ -61,9 +61,11 @@ public class Gui {
 		g.drawString("Player turn: "+Game.players.get(Game.playingPlayer).getName(), 768+20, 138);
 		g.drawString("Round: "+Game.round, 768+20, 158);
 		g.drawString("Money:", 768+20, 420);
+		g.setColor(new Color(0,0,0,255));
 		for (int i = 0; i < Game.players.size(); i++) {
 			g.drawString(Game.players.get(i).getName() + ": " + Game.players.get(i).getMoney(), 768 + 20, 440 + (i*20));
 		}
+		//buttons
 		for(int i=0;i<button.length;i++) {
 			g.setColor(new Color(255,255,255, 255));
 			g.drawRoundRect(button[i].x, button[i].y, button[i].width, button[i].height, 20, 20);
