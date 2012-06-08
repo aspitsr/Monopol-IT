@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 
 public class Dice{
-	public int value;
 	ArrayList<Integer> rolls = new ArrayList<Integer>();
 	
 	public Dice() {
@@ -20,6 +19,7 @@ public class Dice{
 	
 	public int roll(int n)
 	  {
+		int value = 0;
 		for(int i=1;i<=n;i++) {
 			int roll;
 			double number = Math.random();
