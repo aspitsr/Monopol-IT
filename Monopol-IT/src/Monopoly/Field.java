@@ -6,7 +6,6 @@ public class Field {
 	int value = 10000;
 	int property = 0;
 	int category = 1;
-	int rent;
 	Player owner;
 	int x, y;
 	
@@ -54,7 +53,12 @@ public class Field {
 	}
 	
 	public int getRent()	{
-		rent = (value / 10) * property;
+		int rent;
+		if(property>0) {
+			rent = (value / 10) * property;
+		} else {
+			rent = value / 10;
+		}
 		return rent;
 	}
 	
