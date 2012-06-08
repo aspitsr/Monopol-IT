@@ -2,6 +2,8 @@ package Monopoly;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -9,21 +11,36 @@ public class Game {
 	public static int playerCount;
 	public static int round = 1;
 	public static int playingPlayer;
+	public static int loggedPlayer;
 	
 	public static Player turn;
 	
 	public static boolean rolled;
-	public static boolean playing = false;	
+	public static boolean playing = false;
 	
 	public static ArrayList<Player> players = new ArrayList(); 
 	public static Dice dice = new Dice();
+	private DbHandler db = new DbHandler();
 	
 	public Game() {
-		players.add(new Player("Magnus"));
-		players.add(new Player("Henrik"));
-		players.add(new Player("Thomas"));
-		players.add(new Player("Benjamin"));
-		startTurn(0);
+		define();
+	}
+	
+	public void define() {
+		// Get Players From DB
+		ResultSet rsPlayers = db.selectPlayers(1);
+		try {
+			rsPlayers.beforeFirst();
+			while(rsPlayers.next()) {
+				Player player = new Player(rsPlayers.getString("name"));
+				player.setMoney(Integer.parseInt(rsPlayers.getString("position")));
+				player.setPosition(Integer.parseInt(rsPlayers.getString("money")));
+				players.add(player);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void round() {
