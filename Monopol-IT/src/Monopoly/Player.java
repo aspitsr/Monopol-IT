@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 //Player stats
 public class Player {
+	int id;
 	DbHandler db = new DbHandler();
 	ResultSet rs;
 	int money = 10000;
@@ -43,23 +44,23 @@ public class Player {
 	
 	public void payRent(int i) {	
 		System.out.println(getName()+" Payed "+i);
-		money -= i;
+		setMoney(money - i);
 	}
 	
 	public void pay(int i) {	
 		System.out.println(getName()+" Payed "+i);
-		money -= i;
+		setMoney(money - i);
 	}
 	
 	public void recieveRent(int i) {
 		System.out.println(getName()+" Recived "+i);
-		money += i;
+		setMoney(money + i);
 	}
 	
 	public void passedStart(int i) {
 		System.out.println(getName()+" Recived "+i+" for passing Start");
 		if(i>0) {
-			money += (500*i);
+			setMoney(money + (500*i));
 		}
 	}
 	
@@ -74,6 +75,10 @@ public class Player {
 	public void setPosition(int i) {
 		position = i;
 		db.updatePlayers("position", ""+position, name);
+	}
+	
+	public void setId(int i) {
+		id = i;
 	}
 	
 	public String getName() {	

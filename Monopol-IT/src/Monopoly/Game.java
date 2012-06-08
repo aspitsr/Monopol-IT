@@ -35,7 +35,9 @@ public class Game {
 				Player player = new Player(rsPlayers.getString("name"));
 				player.setMoney(Integer.parseInt(rsPlayers.getString("position")));
 				player.setPosition(Integer.parseInt(rsPlayers.getString("money")));
-				players.add(player);
+				if(player.getMoney() > 0) {
+					players.add(player);
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
