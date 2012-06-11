@@ -22,7 +22,7 @@ public class Player {
 		try{
 			rs.beforeFirst();
 			if(rs.next()) {
-				position = Integer.parseInt(rs.getString(4));
+				position = Integer.parseInt(rs.getString("position"));
 			}
 		} catch(Exception e) {
 			System.out.println(e);

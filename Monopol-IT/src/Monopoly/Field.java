@@ -8,6 +8,7 @@ public class Field {
 	int category = 1;
 	Player owner;
 	int x, y;
+	DbHandler db = new DbHandler();
 	
 	public Field(int x, int y, String name, int value,int category) {
 		this.x = x;
@@ -39,8 +40,9 @@ public class Field {
 	}
 	
 	public void setOwner(Player p) {
-		if(owner == null & name != "Start") {
+		if(owner == null && name != "Start" && name != "Corner 1" && name != "Corner 2" && name != "Corner 3") {
 			owner = p;
+			db.insertOwner(owner.id,1, owner.getPosition());
 		}
 	}
 	

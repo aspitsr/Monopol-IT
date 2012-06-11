@@ -50,7 +50,6 @@ public class Screen extends JPanel implements Runnable {
 			if(isFirst) {
 				myWidth = getWidth();
 				myHeight = getHeight();
-				
 				isFirst = false;
 			}
 			board.draw(g);
@@ -63,7 +62,6 @@ public class Screen extends JPanel implements Runnable {
 	
 	public void run() {
 		while(true) {
-
 			if(!isLogin) {
 				repaint();
 			}

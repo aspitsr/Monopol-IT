@@ -9,9 +9,13 @@ import java.util.ArrayList;
 
 
 public class DiceGUI extends Frame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	RoundRectangle2D dice2 = new RoundRectangle2D.Double(160, 75, 100, 100, 30, 30);
 	int dices;
-	private ArrayList<Integer> rolls = new ArrayList();
+	private ArrayList<Integer> rolls = new ArrayList<Integer>();
 
 	public DiceGUI(ArrayList<Integer> a) {
 		rolls = a;

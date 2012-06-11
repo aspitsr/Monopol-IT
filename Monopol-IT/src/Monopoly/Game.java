@@ -33,8 +33,8 @@ public class Game {
 			rsPlayers.beforeFirst();
 			while(rsPlayers.next()) {
 				Player player = new Player(rsPlayers.getString("name"));
-				player.setMoney(Integer.parseInt(rsPlayers.getString("position")));
-				player.setPosition(Integer.parseInt(rsPlayers.getString("money")));
+				player.setMoney(Integer.parseInt(rsPlayers.getString("money")));
+				player.setPosition(Integer.parseInt(rsPlayers.getString("position")));
 				if(player.getMoney() > 0) {
 					players.add(player);
 				}
@@ -43,6 +43,19 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// Get Field owners From DB
+				ResultSet rsOwners = db.selectFieldOwners(1);
+				try {
+					rsOwners.beforeFirst();
+					while(rsOwners.next()) {
+						int fieldID = Integer.parseInt(rsOwners.getString("field_id"));
+						Player player = players.get(Integer.parseInt(rsOwners.getString("owner")));
+						
+						Board.fields.get(fieldID).setOwner(player);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 	}
 	
 	public void round() {

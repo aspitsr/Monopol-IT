@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 // Board controls Player positions
 // Board contains Fields
 public class Board extends JPanel {
-	private	DbHandler db = new DbHandler();
+	public static DbHandler db = new DbHandler();
 	private ResultSet top; 
 	private ResultSet left; 
 	private ResultSet right; 
@@ -64,7 +64,7 @@ public class Board extends JPanel {
 		
 		g.setFont(new Font("Verdana", Font.PLAIN, 15));
 		g.setColor(new Color(255,0,0));
-		g.fillRect(0, 0, Screen.myWidth, Screen.myHeight);
+		g.fillRect(0, 0, Frame.width, Frame.height);
 		g.setColor(new Color(255,255,255));
 		g.fillRoundRect(9, 9, 750, 750, 30, 30);
 		g.setColor(new Color(0,0,0));

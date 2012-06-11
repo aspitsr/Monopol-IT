@@ -129,8 +129,6 @@ public class DbHandler
         ResultSet rsPlayers = null;
     	try{
 	    	stPlayers = conn.createStatement();
-	    	
-	    	
 	    	// Select Players
     		rsPlayers = stPlayers.executeQuery("SELECT * FROM players WHERE game_id ='"+ i +"'");
 	    }
@@ -144,12 +142,24 @@ public class DbHandler
         ResultSet rsPlayers = null;
     	try{
 	    	stPlayers = conn.createStatement();
-	    	// Select Players
+	    	// Select Field Owners
     		rsPlayers = stPlayers.executeQuery("SELECT * FROM owned_fields WHERE game_id ='"+ i +"'");
 	    }
 	    catch (Exception e){
 	    	System.out.println(e);
 	    }
 	    return rsPlayers;
+    }
+    
+    public void insertOwner(int owner, int game, int field){
+    	try
+    	{
+	    	PreparedStatement update = conn.prepareStatement("INSERT INTO owned_fields (owner, game_id, field_id) VALUES('"+ owner +"', '"+ game +"', '"+ field +"') ");
+	        update.executeUpdate();
+    	}
+    	catch(Exception e)
+    	{
+    		System.out.println(e);
+    	}
     }
 }
