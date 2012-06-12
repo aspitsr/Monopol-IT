@@ -15,6 +15,7 @@ public class Player {
 	ArrayList<Integer> pawned = new ArrayList<Integer>();
 	Avatar avatar = new Avatar();
 	int position = 0;
+	boolean inGame;
 	
 	public Player(String s) {
 		name = s;
@@ -87,6 +88,14 @@ public class Player {
 	
 	public void setName(String s) {	
 		name = s;
+	}
+	
+	public void setInGame(boolean b) {	
+		inGame = b;
+	}
+	
+	public boolean inGame() {	
+		return inGame;
 	}
 	
 	public int getMoney() {			

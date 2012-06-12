@@ -37,16 +37,6 @@ public class Gui {
 					}
 					if(i == 2) {
 						Game.endTurn(Game.playingPlayer);
-						if(Game.players.get(Game.playingPlayer).getMoney()<0) {
-							Game.players.remove(Game.playingPlayer);
-						}
-						Game.playing = false;
-						Game.playingPlayer++;
-						if(Game.playingPlayer>=Game.players.size()) {
-							Game.playingPlayer = 0;
-							Game.round++;
-						}
-						Game.startTurn(Game.playingPlayer);
 					}
 				}
 			}
